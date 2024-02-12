@@ -3,6 +3,9 @@ tap 'homebrew/bundle'
 
 brew 'git'
 brew 'python@3.11'
+brew 'wireguard-go'
+brew 'wireguard-tools'
+brew 'sqlcmd'
 
 cask '1password'
 cask 'alacritty'
