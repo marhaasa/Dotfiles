@@ -12,7 +12,6 @@ brew 'neovim'
 brew 'bash-completion'
 brew 'tmux'
 brew 'lazygit'
-brew install keith/formulae/reminders-cli
 
 cask '1password'
 cask '1password-cli'
