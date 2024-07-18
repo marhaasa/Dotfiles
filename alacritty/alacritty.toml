@@ -1,6 +1,6 @@
 # themes from https://github.com/alacritty/alacritty-theme
 
-import = ["/Users/mariushogliaasarod/.config/alacritty/themes/gruvbox_dark.toml"]
+import = ["/Users/mariusaasarod/.config/alacritty/themes/themes/gruvbox_dark.toml"]
 
 [font]
 size = 25
