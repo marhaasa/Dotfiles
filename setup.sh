@@ -9,14 +9,12 @@ export XDG_CONFIG_HOME="$HOME"/.config
 mkdir -p "$XDG_CONFIG_HOME"/bash
 mkdir -p "$XDG_CONFIG_HOME"/alacritty
 mkdir -p "$XDG_CONFIG_HOME"/alacritty/themes
-mkdir -p "$XDG_CONFIG_HOME"/skhd
 mkdir -p "$XDG_CONFIG_HOME"/k9s
 
 # git clone https://github.com/alacritty/alacritty-theme "$XDG_CONFIG_HOME"/alacritty/themes
 
 # Symbolic links
 
-# ln -s ./.amethyst.yml "$HOME"/.amethyst.yml
 ln -sf "$PWD/alacritty.toml" "$XDG_CONFIG_HOME"/alacritty/alacritty.toml
 ln -sf "$PWD/k9s/skin.yml" "$XDG_CONFIG_HOME"/k9s/skin.yml
 ln -sf "$PWD/.bash_profile" "$HOME"/.bash_profile
@@ -24,15 +22,13 @@ ln -sf "$PWD/.bashrc" "$HOME"/.bashrc
 ln -sf "$PWD/.inputrc" "$HOME"/.inputrc
 ln -sf "$PWD/.tmux.conf" "$HOME"/.tmux.conf
 ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME"/nvim
-ln -sf "$PWD/skhdrc" "$XDG_CONFIG_HOME"/skhd/skhdrc
-ln -sf "$PWD/sway" "$XDG_CONFIG_HOME/sway"
 
 # notater
-export NOTES=("/users/mariushogliaasarod/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes/")
+export NOTES=("/users/mariusaasarod/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes/")
 ln -sf "$NOTES" ~/notes
 
 # iCloud
-export ICLOUD=("/Users/mariushogliaasarod/Library/Mobile Documents/com~apple~CloudDocs")
+export ICLOUD=("/Users/mariusaasarod/Library/Mobile Documents/com~apple~CloudDocs")
 ln -sf "$ICLOUD" ~/icloud
 
 # Packages
