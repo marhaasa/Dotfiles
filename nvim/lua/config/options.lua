@@ -16,7 +16,7 @@ opt.foldenable = false
 opt.termguicolors = true
 -- scrolling
 opt.number = false
-opt.relativenumber = false
+opt.relativenumber = true
 opt.scrolloff = 8
 opt.linebreak = true
 
@@ -24,4 +24,4 @@ vim.g.mkdp_browser = "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft 
 
 -- Endringer av DBUI
 -- vim.g.db_ui_win_position = "right"
-vim.g.db_ui_show_help = 0
+-- vim.g.db_ui_show_help = 0

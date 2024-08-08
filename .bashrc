@@ -39,32 +39,32 @@ export HISTCONTROL=ignorespace
 # This function is stolen from rwxrob
 
 clone() {
-	local repo="$1" user
-	local repo="${repo#https://github.com/}"
-	local repo="${repo#git@github.com:}"
-	if [[ $repo =~ / ]]; then
-		user="${repo%%/*}"
-	else
-		user="$GITUSER"
-		[[ -z "$user" ]] && user="$USER"
-	fi
-	local name="${repo##*/}"
-	local userd="$REPOS/github.com/$user"
-	local path="$userd/$name"
-	[[ -d "$path" ]] && cd "$path" && return
-	mkdir -p "$userd"
-	cd "$userd"
-	echo gh repo clone "$user/$name" -- --recurse-submodule
-	gh repo clone "$user/$name" -- --recurse-submodule
-	cd "$name"
+  local repo="$1" user
+  local repo="${repo#https://github.com/}"
+  local repo="${repo#git@github.com:}"
+  if [[ $repo =~ / ]]; then
+    user="${repo%%/*}"
+  else
+    user="$GITUSER"
+    [[ -z "$user" ]] && user="$USER"
+  fi
+  local name="${repo##*/}"
+  local userd="$REPOS/github.com/$user"
+  local path="$userd/$name"
+  [[ -d "$path" ]] && cd "$path" && return
+  mkdir -p "$userd"
+  cd "$userd"
+  echo gh repo clone "$user/$name" -- --recurse-submodule
+  gh repo clone "$user/$name" -- --recurse-submodule
+  cd "$name"
 } && export -f clone
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 alias bashrefresh="source ~/.bash_profile"
-alias v=nvim
+
 sintef() {
-	"cd /Users/Shared/repos/Sintef/Power BI/"
-	"nvim"
+  "cd /Users/Shared/repos/Sintef/Power BI/"
+  "nvim"
 }
 # cd
 alias ..="cd .."
@@ -80,7 +80,8 @@ alias la='ls -lathr'
 # programs
 alias t='tmux'
 alias python="python3"
-
+alias v=nvim
+alias dbui='nvim +:DBUI'
 # git
 alias gp='git pull'
 alias gs='git status'
