@@ -25,9 +25,9 @@ export ICLOUD="$HOME/icloud"
 export NOTES="$HOME/notes"
 
 # ~~~~~~~~~~~~~~~ Path configuration ~~~~~~~~~~~~~~~~~~~~~~~~
-
+export GOPATH=$HOME/go
 #PATH="${PATH:+${PATH}:}"$SCRIPTS":"$HOME"/.local/bin:$HOME/dotnet:/opt/pomo"
-PATH="/opt/:$HOME/.local/bin:$HOME/dotnet:${PATH}:/usr/local/bin/"
+PATH="/opt/:$HOME/.local/bin:$HOME/dotnet:${PATH}:/usr/local/bin/:$PATH:$GOPATH/bin"
 # ~~~~~~~~~~~~~~~ History ~~~~~~~~~~~~~~~~~~~~~~~~
 export HISTFILE=~/.histfile
 export HISTSIZE=25000
@@ -81,7 +81,6 @@ alias la='ls -lathr'
 alias t='tmux'
 alias python="python3"
 alias v=nvim
-alias dbui='nvim +:DBUI'
 # git
 alias gp='git pull'
 alias gs='git status'

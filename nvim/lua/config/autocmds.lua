@@ -62,40 +62,23 @@ vim.api.nvim_create_autocmd("filetype", {
   command = 'lua require("cmp").setup { enabled = true }',
 })
 
-vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
-
-local cmp = require("cmp")
--- local cmp_action = require('lsp-zero').cmp_action()
-
--- -- configure manual  autocompletion
--- cmp.setup({
---     mapping = cmp.mapping.preset.insert({
---         -- tab completion
---         ['<Tab>'] = cmp_action.tab_complete(),
---         ['<S-Tab>'] = cmp_action.select_prev_or_fallback(),
---     })
--- })
-
--- autocmd FileType sql,mysql,plsql lua require('cmp').setup.buffer({ sources = {{ name = 'vim-dadbod-completion' }} })
-vim.api.nvim_create_autocmd("FileType", {
-  pattern = { "sql", "mysql", "plsql" },
-  callback = function()
-    cmp.setup.buffer({
-      sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-        { name = "nerdfont" },
-        { name = "vim-dadbod-completion" },
-      },
-    })
-  end,
-})
+--vim.cmd([[autocmd BufWritePre <buffer> lua vim.lsp.buf.format()]])
+--local cmp = require("cmp")
+--local cmp_action = require("lsp-zero").cmp_action()
+-- configure manual  autocompletion
+--cmp.setup({
+--  mapping = cmp.mapping.preset.insert({
+--    -- tab completion
+--    ["<Tab>"] = cmp_action.tab_complete(),
+--    ["<S-Tab>"] = cmp_action.select_prev_or_fallback(),
+--  }),
+--})
 
 -- autocmd for .sql files to use poor mans T-SQL formatter on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = "*.sql",
-  command = ":%!sqlformat",
-})
+--vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--  pattern = "*.sql",
+--  command = ":%!sqlformat",
+--})
 
 function _G.extract_tasks_and_remind()
   -- Redirect the output of the :g command to a variable
