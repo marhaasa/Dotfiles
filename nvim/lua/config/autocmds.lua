@@ -75,10 +75,10 @@ vim.api.nvim_create_autocmd("filetype", {
 --})
 
 -- autocmd for .sql files to use poor mans T-SQL formatter on save
---vim.api.nvim_create_autocmd({ "BufWritePre" }, {
---  pattern = "*.sql",
---  command = ":%!sqlformat",
---})
+vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  pattern = "*.sql",
+  command = ":%!sqlformat",
+})
 
 function _G.extract_tasks_and_remind()
   -- Redirect the output of the :g command to a variable

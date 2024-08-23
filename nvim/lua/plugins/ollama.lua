@@ -28,7 +28,7 @@ return {
 
   ---@type Ollama.Config
   opts = {
-    model = "dolphin-llama3:70B",
+    model = "deepseek-coder-v2:latest",
     url = "http://127.0.0.1:11434",
     serve = {
       on_start = false,
@@ -43,7 +43,14 @@ return {
         prompt = "Add clear and consise comments to this code to make it both simple to understand and elaborate. Do not edit the actual code and keep all the original code in your answer together with comments."
           .. response_format
           .. "\n\n```$ftype\n$sel```",
-        model = "dolphin-llama3:70B",
+        model = "deepseek-coder-v2:latest",
+        action = "replace",
+      },
+      Add_summary = {
+        prompt = "Add a summary of this text at the bottom. Keep the original text and make sure the summary is in the same language as the text itself."
+          .. response_format
+          .. "\n\n```$ftype\n$sel```",
+        model = "llama3.1:8b",
         action = "replace",
       },
     },

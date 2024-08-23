@@ -1,6 +1,6 @@
 # themes from https://github.com/alacritty/alacritty-theme
 
-import = ["/Users/mariusaasarod/.config/alacritty/themes/themes/gruvbox_dark.toml"]
+import = ["/Users/mariushogliaasarod/.config/alacritty/themes/gruvbox_dark.toml"]
 
 [font]
 size = 25
@@ -16,5 +16,5 @@ x = 7
 y = 0
 
 [shell]
-program = "/opt/homebrew/bin/bash"
+program = "/opt/homebrew/bin/zsh"
 args = ["-l"]

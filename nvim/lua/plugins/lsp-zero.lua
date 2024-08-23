@@ -5,7 +5,7 @@ return {
       ensure_installed = {
         "tsserver",
         "pyright",
-        "sql",
+        "sqls",
       },
     })
   end,
