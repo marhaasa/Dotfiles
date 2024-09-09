@@ -1,0 +1,7 @@
+{
+  "language": "transactsql",
+  "tabWidth": 1,
+  "keywordCase": "upper",
+  "linesBetweenQueries": 2,
+  "indentStyle": "tabularLeft"
+}
