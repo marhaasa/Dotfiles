@@ -25,7 +25,6 @@ return {
       "hrsh7th/cmp-nvim-lsp",
       "hrsh7th/cmp-nvim-lua",
       "saadparwaiz1/cmp_luasnip",
-      "mattiasmts/cmp-dbee",
     },
     config = function()
       local import_cmp, cmp = pcall(require, "cmp")
@@ -75,7 +74,6 @@ return {
           { name = "nvim_lsp" },
           { name = "luasnip" },
           { name = "cmp-dbee" },
-        }, {
           { name = "buffer" },
         }),
       })
