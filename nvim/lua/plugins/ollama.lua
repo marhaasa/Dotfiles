@@ -28,7 +28,7 @@ return {
 
   ---@type Ollama.Config
   opts = {
-    model = "deepseek-coder-v2:latest",
+    model = "mistral-nemo:latest",
     url = "http://127.0.0.1:11434",
     serve = {
       on_start = false,
@@ -39,6 +39,7 @@ return {
     },
     -- View the actual default prompts in ./lua/ollama/prompts.lua
     prompts = {
+
       Add_Comments = {
         prompt = "Add clear and consise comments to this code to make it both simple to understand and elaborate. Do not edit the actual code and keep all the original code in your answer together with comments."
           .. response_format
@@ -53,6 +54,7 @@ return {
         model = "llama3.1:8b",
         action = "replace",
       },
+      Raw = { model = "llama3.1:8b" },
     },
   },
 }

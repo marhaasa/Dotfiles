@@ -75,10 +75,10 @@ vim.api.nvim_create_autocmd("filetype", {
 --})
 
 -- autocmd for .sql files to use poor mans T-SQL formatter on save
-vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  pattern = "*.sql",
-  command = ":%!sqlformat",
-})
+--vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+--  pattern = "*.sql",
+--  command = ":%!sqlformat",
+--})
 
 function _G.extract_tasks_and_remind()
   -- Redirect the output of the :g command to a variable
@@ -110,3 +110,11 @@ function _G.extract_tasks_and_remind()
     end
   end
 end
+
+-- Create an autocmd for BufWinEnter event to remove gray highlighted comments
+vim.api.nvim_create_autocmd("BufWinEnter", {
+  pattern = "*",
+  callback = function()
+    vim.cmd("hi Comment term=bold cterm=NONE ctermfg=Darkgrey ctermbg=NONE gui=NONE guifg=NONE guibg=NONE")
+  end,
+})

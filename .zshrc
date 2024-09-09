@@ -38,6 +38,7 @@ path=(
     $SCRIPTS
     /opt/homebrew/bin
     /Users/mariushogliaasarod/Library/Caches/pypoetry/virtualenvs/zettelkasten-cli-gtRlR78O-py3.12/bin
+    /opt/homebrew/opt/mssql-tools18/bin
 )
 
 # Remove duplicate entries and non-existent directories
@@ -78,8 +79,8 @@ prompt pure
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 
 sintef() {
-  "cd /Users/Shared/repos/Sintef/Power BI/"
-  "nvim"
+  cd /Users/Shared/repos/Sintef/Power\ BI/
+  nvim
 }
 # cd
 alias ..="cd .."
@@ -121,7 +122,7 @@ alias hy="
 
 # ~~~~~~~~~~~~~~~ Sourcing ~~~~~~~~~~~~~~~~~~~~~~~~
 source <(fzf --zsh)
-
+eval $(thefuck --alias)
 
 # ~~~~~~~~~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~
 # This function is stolen from rwxrob
