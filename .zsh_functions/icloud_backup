@@ -1,0 +1,24 @@
+function icloud_backup() {
+    local DEST="$1"
+    local USER="$(whoami)"
+    local SRC="/Users/$USER/Library/Mobile Documents/"
+
+    if [[ -z "$DEST" ]]; then
+        echo "❌  Error: No destination folder provided."
+        echo "Usage: icloud_backup /path/to/destination"
+        return 1
+    fi
+
+    echo "⏩  Source: $SRC"
+    echo "⏩  Destination: $DEST"
+    echo "⏩  Starting rsync backup..."
+    echo ""
+
+    # for testing: use --dry-run
+    rsync --verbose --recursive --prune-empty-dirs --delete-before --whole-file --times --exclude=".DS_Store" --exclude=".Trash/" "$SRC" "$DEST"
+
+    echo ""
+    echo "🌈  Done!"
+    echo ""
+}
+

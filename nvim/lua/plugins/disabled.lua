@@ -5,5 +5,5 @@ return {
   --{"nvim-treesitter/nvim-treesitter", enabled=false}
 
   -- temporarily disabled due to empty file issue
-  { "lsp-zero", enabled = false },
+  --{ "obsidian.nvim", enabled = false },
 }

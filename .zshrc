@@ -39,6 +39,7 @@ path=(
     /opt/homebrew/bin
     /Users/mariushogliaasarod/Library/Caches/pypoetry/virtualenvs/zettelkasten-cli-gtRlR78O-py3.12/bin
     /opt/homebrew/opt/mssql-tools18/bin
+    /Applications/Docker.app/Contents/Resources/bin/
 )
 
 # Remove duplicate entries and non-existent directories
@@ -125,53 +126,12 @@ source <(fzf --zsh)
 eval $(thefuck --alias)
 
 # ~~~~~~~~~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~~~
-# This function is stolen from rwxrob
 
-clone() {
-  local repo="$1" user name userd path
-  repo="${repo#https://github.com/}"
-  repo="${repo#git@github.com:}"
-  if [[ $repo == */* ]]; then
-    user="${repo%%/*}"
-  else
-    user="$GITUSER"
-    [[ -z "$user" ]] && user="$USER"
-  fi
-  name="${repo##*/}"
-  userd="$REPOS/github.com/$user"
-  path="$userd/$name"
-  
-  echo "Debug: repo=$repo, user=$user, name=$name, userd=$userd, path=$path"
-  
-  # Ensure PATH is set correctly
-  export PATH="/bin:/usr/bin:/usr/local/bin:/opt/homebrew/bin:$PATH"
-  
-  # Use command substitution to find full paths
-  local mkdir_cmd=$(command -v mkdir)
-  local gh_cmd=$(command -v gh)
-  
-  # Use full path for mkdir
-  if [[ ! -d "$REPOS/github.com" ]]; then
-    echo "Base directory $REPOS/github.com does not exist. Creating it..."
-    $mkdir_cmd -p "$REPOS/github.com"
-  fi
-  
-  if [[ ! -d "$userd" ]]; then
-    echo "User directory $userd does not exist. Creating it..."
-    $mkdir_cmd -p "$userd"
-  fi
-  
-  if [[ -d "$path" ]]; then
-    cd "$path" && return
-  fi
-  
-  cd "$userd"
-  echo "Running: gh repo clone $user/$name -- --recurse-submodule"
-  $gh_cmd repo clone "$user/$name" -- --recurse-submodule
-  cd "$name"
-}
 
-functions -M clone
+fpath=(~/.zsh_functions $fpath)
+autoload -Uz clone
+
+autoload -Uz icloud_backup
 
 
 # ~~~~~~~~~~~~~~~ Completion ~~~~~~~~~~~~~~~~~~~~~~~~
