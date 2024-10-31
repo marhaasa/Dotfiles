@@ -112,7 +112,6 @@ alias lg='lazygit'
 alias fishies=asciiquarium
 
 # history
-alias hist='history 0 | fzf'
 alias hy="
   fc -ln 0 |
   awk '!a[\$0]++' |
