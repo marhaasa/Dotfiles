@@ -133,11 +133,12 @@ autoload -Uz clone
 
 autoload -Uz icloud_backup
 
+autoload -Uz icloud_backup_photos
+
 
 # ~~~~~~~~~~~~~~~ Completion ~~~~~~~~~~~~~~~~~~~~~~~~
 
 
-fpath+=~/.zfunc
 
 if type brew &>/dev/null; then
     FPATH=$(brew --prefix)/share/zsh-completions:$FPATH

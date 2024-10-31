@@ -1,0 +1,35 @@
+function backup_icloud_photos() {
+    set -euo pipefail
+
+    local args=(
+        --delete
+        --human-readable
+        --no-perms
+        --partial
+        --progress
+        --times
+        -v
+    )
+
+    local USER="$(whoami)"
+    local src="/Users/$USER/Pictures/Photos Library.photoslibrary/originals/"
+    local dest="$1"
+
+    if [[ -z "$dest" ]]; then
+        echo "❌  Error: No destination folder provided."
+        echo "Usage: backup_icloud_photos /path/to/destination"
+        return 1
+    fi
+
+    echo "⏩  Source: $src"
+    echo "⏩  Destination: $dest"
+    echo "⏩  Starting rsync backup..."
+    echo ""
+
+    rsync "${args[@]}" "$src" "$dest"
+
+    echo ""
+    echo "🌈  Done!"
+    echo ""
+}
+
