@@ -5,5 +5,7 @@ return {
   --{"nvim-treesitter/nvim-treesitter", enabled=false}
 
   -- temporarily disabled due to empty file issue
-  --{ "obsidian.nvim", enabled = false },
+  { "obsidian.nvim", enabled = false },
+  { "avante.nvim", enabled = false },
+  { "ollama.nvim", enabled = false },
 }

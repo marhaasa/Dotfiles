@@ -40,6 +40,7 @@ path=(
     /Users/mariushogliaasarod/Library/Caches/pypoetry/virtualenvs/zettelkasten-cli-gtRlR78O-py3.12/bin
     /opt/homebrew/opt/mssql-tools18/bin
     /Applications/Docker.app/Contents/Resources/bin/
+    /Users/mariushogliaasarod/.cargo/bin
 )
 
 # Remove duplicate entries and non-existent directories
