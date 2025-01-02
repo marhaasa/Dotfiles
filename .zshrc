@@ -80,6 +80,8 @@ prompt pure
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 
+alias ghost='/Users/mariushogliaasarod/Repos/github.com/lukeshere/ghostty-animation-command/target/debug/./ghostty_animation'
+
 sintef() {
   cd /Users/Shared/repos/Sintef/Power\ BI/
   nvim
@@ -93,6 +95,7 @@ buildsql() {
         echo "No .sqlproj file found in the current directory or its subdirectories."
     fi
 }
+
 # cd
 alias ..="cd .."
 alias repos="cd /Users/Shared/repos"
