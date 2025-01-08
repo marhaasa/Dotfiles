@@ -2,7 +2,11 @@ return {
   "robitx/gp.nvim",
   config = function()
     local conf = {
-      openai_api_key = $API_KEY 
+      openai_api_key = {
+        "op",
+        "read",
+        "op://Private/OpenAI API key/credential",
+      },
       providers = {
         ollama = {
           disable = false,
@@ -44,6 +48,19 @@ return {
             min_p = 0.05,
           },
           system_prompt = "You are a general AI assistant.",
+        },
+        {
+          provider = "ollama",
+          name = "qwencoder",
+          chat = true,
+          command = false,
+          model = {
+            model = "qwen2.5-coder:14b",
+            temperature = 0.6,
+            top_p = 1,
+            min_p = 0.05,
+          },
+          system_prompt = "You are a coding specialist.",
         },
       },
 
