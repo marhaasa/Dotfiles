@@ -90,7 +90,7 @@ sintef() {
 buildsql() {
     local project_file=$(find . -name "DW.sqlproj" -print -quit)
     if [[ -n "$project_file" ]]; then
-        dotnet build "$project_file" /p:NetCoreBuild=true /p:NETCoreTargetsPath="/Users/mariushogliaasarod/.azuredatastudio/extensions/microsoft.sql-database-projects-1.4.5/BuildDirectory" /p:SystemDacpacsLocation="/Users/mariushogliaasarod/.azuredatastudio/extensions/microsoft.sql-database-projects-1.4.3/BuildDirectory"
+        dotnet build "$project_file" /p:NetCoreBuild=true /p:NETCoreTargetsPath="/Users/mariushogliaasarod/.azuredatastudio/extensions/microsoft.sql-database-projects-1.4.5/BuildDirectory" /p:SystemDacpacsLocation="/Users/mariushogliaasarod/.azuredatastudio/extensions/microsoft.sql-database-projects-1.4.5/BuildDirectory"
     else
         echo "No .sqlproj file found in the current directory or its subdirectories."
     fi
