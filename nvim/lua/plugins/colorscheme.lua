@@ -1,12 +1,14 @@
 return {
-  -- add gruvbox
-  { "wittyjudge/gruvbox-material.nvim" },
-
-  -- Configure LazyVim to load gruvbox
-  {
-    "LazyVim/LazyVim",
-    opts = {
-      colorscheme = "gruvbox-material",
-    },
-  },
+  "ellisonleao/gruvbox.nvim",
+  priority = 1000,
+  config = function()
+    require("gruvbox").setup({
+      contrast = "hard",
+      overrides = {
+        Title = { link = "GruvboxOrangeBold" },
+      },
+    })
+    vim.cmd.colorscheme("gruvbox")
+    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" })
+  end,
 }
