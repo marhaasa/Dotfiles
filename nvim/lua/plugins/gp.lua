@@ -112,6 +112,18 @@ return {
           local agent = gp.get_command_agent()
           gp.Prompt(params, gp.Target.vnew, agent, template)
         end,
+        RewriteToDiff = function(gp, params)
+          local template = "I have the following from {{filename}}:\n\n"
+            .. "```{{filetype}}\n{{selection}}\n```\n\n"
+            .. "Rewrite it based on these instructions: {{command}}\n\n"
+            .. "Respond with the following:\n\n"
+            .. "  - a code block containing the rewritten code\n\n"
+            .. "  - a brief summary of the changes that were made along with the reasons for doing so\n\n"
+            .. '  - a "diff" code block that shows the code changes in a diff format with color formatting in the output.\n\n'
+          local agent = gp.get_chat_agent("qwencoder")
+          local input_prompt = "🤖 " .. agent.name .. " ~"
+          gp.Prompt(params, gp.Target.popup, agent, template, input_prompt)
+        end,
       },
     }
 
