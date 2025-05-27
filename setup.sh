@@ -6,31 +6,24 @@
 
 # create directories
 export XDG_CONFIG_HOME="$HOME"/.config
-mkdir -p "$XDG_CONFIG_HOME"/bash
-mkdir -p "$XDG_CONFIG_HOME"/alacritty
-mkdir -p "$XDG_CONFIG_HOME"/alacritty/themes
+mkdir -p "$XDG_CONFIG_HOME"/zsh
 mkdir -p "$XDG_CONFIG_HOME"/k9s
 
-# git clone https://github.com/alacritty/alacritty-theme "$XDG_CONFIG_HOME"/alacritty/themes
-
 # Symbolic links
-
-ln -sf "$PWD/alacritty/alacritty.toml" "$XDG_CONFIG_HOME"/alacritty/alacritty.toml
-ln -sf "$PWD/alacritty/themes/" "$XDG_CONFIG_HOME"/alacritty/themes/
 ln -sf "$PWD/k9s/skin.yml" "$XDG_CONFIG_HOME"/k9s/skin.yml
-ln -sf "$PWD/.bash_profile" "$HOME"/.bash_profile
-ln -sf "$PWD/.bashrc" "$HOME"/.bashrc
+ln -sf "$PWD/.zshrc" "$HOME"/.zshrc
+ln -sf "$PWD/.bash_profile" "$HOME"/.bash_profile  # Keep for compatibility
+ln -sf "$PWD/.bashrc" "$HOME"/.bashrc  # Keep for compatibility
 ln -sf "$PWD/.inputrc" "$HOME"/.inputrc
-ln -sf "$PWD/.tmux.conf" "$HOME"/.tmux.conf
 ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME"/nvim
-ln -sf "$PWD/starship.toml" "$XDG_CONFIG_HOME"/starship.toml
+# Note: starship.toml not used with pure prompt in zsh
 
-# notater
-export NOTES=("/users/mariusaasarod/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes/")
+# notater - use current user's home directory
+export NOTES="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Notes/"
 ln -sf "$NOTES" ~/notes
 
-# iCloud
-export ICLOUD=("/Users/mariusaasarod/Library/Mobile Documents/com~apple~CloudDocs")
+# iCloud - use current user's home directory
+export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 ln -sf "$ICLOUD" ~/icloud
 
 # Packages

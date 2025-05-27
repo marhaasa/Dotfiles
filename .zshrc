@@ -11,7 +11,7 @@ set -o vi
 
 export VISUAL=nvim
 export EDITOR=nvim
-export TERM="tmux-256color"
+# export TERM="tmux-256color"  # No longer using tmux
 
 # export BROWSER="firefox"
 
@@ -110,7 +110,7 @@ alias ll='ls -la'
 alias la='ls -lathr'
 
 # programs
-alias t='tmux'
+# alias t='tmux'  # No longer using tmux
 alias python="python3"
 alias v=nvim
 

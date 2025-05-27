@@ -1,18 +1,21 @@
-# Dotfiles #WIP
-A collection of all my public config and dotfiles.
+# Dotfiles
 
-Things are sort of up and running now, but there are a few things that need to be fixed.
+A collection of my public config and dotfiles. Primary setup uses **zsh** with **Ghostty** terminal and **Neovim**.
 
- - [ ] Alacritty directory structure
- - [ ] brew install x y z
- - [ ] more flexibility when it comes to having different usernames on different machines in setup.sh
+## Current Setup
+- **Shell**: zsh with pure prompt
+- **Terminal**: Ghostty 
+- **Editor**: Neovim
+- **Git UI**: Lazygit
+- **Package Manager**: Homebrew
 
+## Installation
 
-# Notes from installing on second mbp 2024-07-18
+1. Clone this repo
+2. Run `./setup.sh` - uses `$HOME` for dynamic user paths
+3. Install packages: `brew bundle`
 
-Everything went quite smoothly except the following things:
-- Some structure tweaks for alacritty.toml and alacritty/themes
-- Ran `chsh -s /bin/bash` to set bash as default shell (NB! not homebrew bash)
-- Needed to install Ubuntu Mono Nerdfonts semi manually through download and install
-- some treesitter errors in nvim setup
+## Notes
+- Bash configs kept for compatibility
+- Username paths now use `$HOME` variable for portability
 
