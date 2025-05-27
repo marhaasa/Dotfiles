@@ -20,6 +20,11 @@ opt.linebreak = true
 opt.cmdheight = 0
 opt.fillchars = { eob = " " }
 opt.showtabline = 0
+opt.laststatus = 0
+opt.ruler = false
+opt.showcmd = false
+opt.cursorline = false
+opt.cursorcolumn = false
 
 -- These functions along with the underlying notat CLI is heavily borrowed from mischavandenburg
 -- This requires the underlying adaptation of the CLI to be accessible locally

@@ -104,11 +104,16 @@ function _G.extract_tasks_and_remind()
   end
 end
 
--- Create an autocmd for BufWinEnter event to remove gray highlighted comments
+-- Create an autocmd for BufWinEnter event to remove gray highlighted comments and disable statusline on dashboard
 vim.api.nvim_create_autocmd("BufWinEnter", {
   pattern = "*",
   callback = function()
     vim.cmd("hi Comment term=bold cterm=NONE ctermfg=Darkgrey ctermbg=NONE gui=NONE guifg=NONE guibg=NONE")
+    
+    -- Force disable statusline on entry screens while keeping them visible
+    if vim.bo.filetype == "lazy" or vim.bo.filetype == "dashboard" or vim.bo.filetype == "alpha" or vim.bo.filetype == "snacks_dashboard" then
+      vim.opt_local.laststatus = 0
+    end
   end,
 })
 
