@@ -118,3 +118,12 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
     vim.cmd("hi Comment term=bold cterm=NONE ctermfg=Darkgrey ctermbg=NONE gui=NONE guifg=NONE guibg=NONE")
   end,
 })
+
+-- Diable check for markdown links
+--
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "markdown",
+  callback = function()
+    vim.diagnostic.enable(false)
+  end,
+})

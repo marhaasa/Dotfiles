@@ -32,15 +32,16 @@ export NOTES="$HOME/notes"
 setopt extended_glob null_glob
 
 path=(
-    $path                           # Keep existing PATH entries
+    /opt/homebrew/opt/python@3.12/bin  # Homebrew Python first
+    /opt/homebrew/bin
     $HOME/bin
     $HOME/.local/bin
     $SCRIPTS
-    /opt/homebrew/bin
     /Users/mariushogliaasarod/Library/Caches/pypoetry/virtualenvs/zettelkasten-cli-gtRlR78O-py3.12/bin
     /opt/homebrew/opt/mssql-tools18/bin
     /Applications/Docker.app/Contents/Resources/bin/
     /Users/mariushogliaasarod/.cargo/bin
+    $path  # Original PATH comes last
 )
 
 # Remove duplicate entries and non-existent directories
