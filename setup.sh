@@ -7,10 +7,8 @@
 # create directories
 export XDG_CONFIG_HOME="$HOME"/.config
 mkdir -p "$XDG_CONFIG_HOME"/zsh
-mkdir -p "$XDG_CONFIG_HOME"/k9s
 
 # Symbolic links
-ln -sf "$PWD/k9s/skin.yml" "$XDG_CONFIG_HOME"/k9s/skin.yml
 ln -sf "$PWD/.zshrc" "$HOME"/.zshrc
 ln -sf "$PWD/.bash_profile" "$HOME"/.bash_profile  # Keep for compatibility
 ln -sf "$PWD/.bashrc" "$HOME"/.bashrc  # Keep for compatibility
