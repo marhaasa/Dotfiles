@@ -20,6 +20,11 @@ opt.relativenumber = false
 opt.scrolloff = 8
 opt.linebreak = true
 
+-- Remove command line and other UI elements
+opt.cmdheight = 0
+opt.fillchars = { eob = " " }
+opt.showtabline = 0
+
 vim.g.mkdp_browser = "/Applications/Microsoft Edge.app/Contents/MacOS/Microsoft Edge"
 
 -- These functions along with the underlying notat CLI is heavily borrowed from mischavandenburg

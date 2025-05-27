@@ -119,11 +119,53 @@ vim.api.nvim_create_autocmd("BufWinEnter", {
   end,
 })
 
--- Diable check for markdown links
---
+-- Better markdown settings
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
-    vim.diagnostic.enable(false)
+    -- Only apply if buffer is valid
+    if not vim.api.nvim_buf_is_valid(0) then return end
+    
+    -- Re-enable diagnostics but make them less intrusive
+    vim.diagnostic.enable(true)
+    vim.diagnostic.config({
+      virtual_text = false,
+      signs = false,
+      underline = false,
+      update_in_insert = false,
+    })
+    
+    -- Better text settings - balanced conceal level
+    vim.opt_local.conceallevel = 2
+    vim.opt_local.concealcursor = 'nv'
+    
+    -- Just disable line-causing elements, let render-markdown handle code blocks
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(0) and vim.bo.filetype == 'markdown' then
+        pcall(function()
+          vim.cmd('syntax clear markdownRule')
+          vim.cmd('syntax clear markdownLineBreak')
+        end)
+      end
+    end)
+    vim.opt_local.linebreak = true
+    vim.opt_local.breakindent = true
+    vim.opt_local.showbreak = '  ↳ '
+    
+    -- Better folding
+    vim.opt_local.foldmethod = 'expr'
+    vim.opt_local.foldexpr = 'nvim_treesitter#foldexpr()'
+    vim.opt_local.foldenable = false
+    
+    -- Custom wikilink highlighting without icons (with safety check)
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(0) and vim.bo.filetype == 'markdown' then
+        pcall(function()
+          vim.cmd('syntax clear markdownWikiLink')
+          vim.cmd('syntax match markdownWikiLink /\\[\\[\\zs.\\{-}\\ze\\]\\]/')
+          vim.cmd('highlight link markdownWikiLink Identifier')
+        end)
+      end
+    end)
   end,
 })
