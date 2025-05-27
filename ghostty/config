@@ -1,0 +1,23 @@
+# theme = gruvbox-material
+theme = GruvboxDarkHard
+
+font-size = 20
+# font-family = "UbuntuMono Nerd Font"
+# font-family = "Mononoki"
+font-family = "IosevkaTerm Nerd Font"
+font-thicken = true
+
+window-save-state = always
+
+command = /opt/homebrew/bin/zsh
+
+shell-integration = zsh
+
+macos-titlebar-style = tabs
+
+# custom-shader = /Users/mariushogliaasarod/Repos/github.com/m-ahdal/ghostty-shaders/just-snow.glsl
+# custom-shader = /Users/mariushogliaasarod/Repos/github.com/m-ahdal/ghostty-shaders/glitchy.glsl
+
+keybind = ctrl+b=new_split:auto
+keybind = shift+ctrl+b=close_surface
+keybind = shift+enter=text:\n
