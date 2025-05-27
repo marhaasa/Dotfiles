@@ -16,6 +16,7 @@ ln -sf "$PWD/.bashrc" "$HOME"/.bashrc  # Keep for compatibility
 ln -sf "$PWD/.inputrc" "$HOME"/.inputrc
 ln -sf "$PWD/nvim" "$XDG_CONFIG_HOME"/nvim
 ln -sf "$PWD/ghostty/config" "$HOME/Library/Application Support/com.mitchellh.ghostty/config"
+ln -sf "$PWD/.zsh_functions" "$HOME"/.zsh_functions
 # Note: starship.toml not used with pure prompt in zsh
 
 # notater - use current user's home directory
