@@ -4,7 +4,7 @@ tap 'keith/formulae'
 tap 'marhaasa/tools'
 
 brew 'git'
-brew 'python@3.11'
+brew 'python@3.12'
 brew 'wireguard-go'
 brew 'wireguard-tools'
 brew 'sqlcmd'

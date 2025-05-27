@@ -26,42 +26,6 @@ ln -sf "$NOTES" ~/notes
 export ICLOUD="$HOME/Library/Mobile Documents/com~apple~CloudDocs"
 ln -sf "$ICLOUD" ~/icloud
 
-# Packages
-
-# install brew
-# /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# get the font out of the way first, it's the most annoying
-#
-# install for Mac using brew. For ubuntu:
-
-# mkdir -p $HOME/.local/share/fonts
-# cp $PWD/fonts/UbuntuMono* $HOME/.local/share/fonts
-
-# brew packages Mac
-# amethyst fzf nvim exa hugo bash-completion@2 newsboat kubectl starship
-# brew install --cask alacritty
-
-# ubuntu packages apt
-# sudo apt install ripgrep gh
-
-# ubuntu apt neovim setup
-# sudo apt install gcc g++ unzip
-
-# ubuntu brew for vim and neovim setup
-# sudo apt install fd fzf kubectl kubectx derailed/k9s/k9s starship
-
-# ubuntu brew for neovim setup
-# brew install neovim go lazygit
-
-# ubuntu specific notes
-# create symbolic link to neovim from vim when not using neovim on
-# Ubuntu systems, because I use the v alias everywhere.
-# sudo ln -sf /usr/bin/vim /usr/bin/nvim
-#
-
-# Fedora
-
-# brew install fd fzf ripgrep
-
-# /usr/bin/python3 -m pip install pynvim
+# Global Python tools via pipx (run after brew bundle installs Python)
+echo "Installing global Python tools..."
+pipx install poetry

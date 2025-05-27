@@ -12,8 +12,8 @@ A collection of my public config and dotfiles. Primary setup uses **zsh** with *
 ## Installation
 
 1. Clone this repo
-2. Run `./setup.sh` - uses `$HOME` for dynamic user paths
-3. Install packages: `brew bundle`
+2. Install packages: `brew bundle`
+3. Run `./setup.sh` - creates symlinks and installs Python tools
 
 ## Notes
 - Bash configs kept for compatibility
