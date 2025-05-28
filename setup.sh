@@ -196,6 +196,7 @@ post_install() {
   fi
 
   # Set up ssh config with 1Password ssh agent
+  info "Set up ssh config with 1Password agent..."
   SSH_CONFIG="$HOME/.ssh/config"
   ONEPASSWORD_AGENT_PATH="~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
 
@@ -210,18 +211,21 @@ post_install() {
       echo "Host *"
       echo "  IdentityAgent $ONEPASSWORD_AGENT_PATH"
     } >>"$SSH_CONFIG"
-    echo "🔐 Added 1Password SSH agent to ~/.ssh/config"
+    info "Added 1Password SSH agent to ~/.ssh/config"
   else
-    echo "✅ 1Password SSH agent already configured in ~/.ssh/config"
+    info "1Password SSH agent already configured in ~/.ssh/config"
   fi
 
   chmod 600 "$SSH_CONFIG"
 
   # Set Git user config
+  info "Set up git config"
   if [ -z "$(git config --global user.name)" ]; then
     git config --global user.name "marhaasa"
     git config --global user.email "marius@aasarod.no"
-    echo "Configured Git user."
+    info "Configured Git user and email."
+  else
+    info "Git user and email already configured."
   fi
 
 }
