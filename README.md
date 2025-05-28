@@ -6,16 +6,18 @@ A collection of my public config and dotfiles. Primary setup uses **zsh** with *
 - **Shell**: zsh with pure prompt
 - **Terminal**: Ghostty 
 - **Editor**: Neovim
+- Git config: marhaasa / marius@aasarod.no
 - **Git UI**: Lazygit
 - **Package Manager**: Homebrew
+- SSH Agent: 1Password
 
 ## Installation
 
 1. Clone this repo
-2. Install packages: `brew bundle`
-3. Run `./setup.sh` - creates symlinks and installs Python tools
+2. Run `./setup.sh`
+3. Start 1Password and enable Developer -> Use the SSH Agent
+
 
 ## Notes
 - Bash configs kept for compatibility
-- Username paths now use `$HOME` variable for portability
 
