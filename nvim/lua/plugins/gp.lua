@@ -1,5 +1,7 @@
 return {
   "robitx/gp.nvim",
+  lazy = true,
+  event = "VeryLazy", -- Load after startup
   config = function()
     local conf = {
       openai_api_key = {

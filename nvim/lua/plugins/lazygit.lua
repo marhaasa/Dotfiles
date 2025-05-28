@@ -1,5 +1,6 @@
 return {
   "kdheepak/lazygit.nvim",
+  lazy = true, -- Don't load until command is used
   cmd = {
     "LazyGit",
     "LazyGitConfig",
