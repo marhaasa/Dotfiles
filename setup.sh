@@ -187,6 +187,9 @@ post_install() {
   info "Adding zsh to /etc/shells..."
   echo $(which zsh) | sudo tee -a /etc/shells
 
+  info "Set zsh as default user shell"
+  sudo chsh -s $(which zsh) $USER
+
   # Set zsh as default shell if not already
   if [[ "$SHELL" != */zsh ]]; then
     warn "Current shell is not zsh. Run 'chsh -s $(which zsh)' to change it."
