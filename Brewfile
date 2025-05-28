@@ -39,6 +39,7 @@ brew 'newsboat'
 brew 'kubernetes-cli'
 brew 'minikube'
 brew 'ollama'
+brew 'pure'
 
 cask '1password'
 cask '1password-cli'
