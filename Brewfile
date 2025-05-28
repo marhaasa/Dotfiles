@@ -40,6 +40,7 @@ brew 'kubernetes-cli'
 brew 'minikube'
 brew 'ollama'
 brew 'pure'
+brew 'dockutil'
 
 cask '1password'
 cask '1password-cli'

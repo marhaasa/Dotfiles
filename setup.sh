@@ -155,6 +155,21 @@ setup_macos_specific() {
   else
     warn "iCloud directory not found at $icloud_path"
   fi
+
+  info "Configuring dock..."
+  # Remove everything first (optional)
+  dockutil --remove all --no-restart
+
+  # Add your favorite apps in order:
+  dockutil --add "/Applications/Ghostty.app" --position 1
+  dockutil --add "/Applications/Arc.app" --position 2
+  dockutil --add "/Applications/Claude.app" --position 3
+  dockutil --add "/Applications/Calendar.app" --position 4
+  dockutil --add "/Applications/Music.app" --position 5
+
+  # Finally, restart the Dock to apply
+  killall Dock
+  info "Dock configured!"
 }
 
 # Install packages
