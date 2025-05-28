@@ -9,7 +9,7 @@ A collection of my public config and dotfiles. Primary setup uses **zsh** with *
 - Git config: marhaasa / marius@aasarod.no
 - **Git UI**: Lazygit
 - **Package Manager**: Homebrew
-- SSH Agent: 1Password
+- **SSH Agent**: 1Password
 
 ## Installation
 
