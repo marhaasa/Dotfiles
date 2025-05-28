@@ -164,11 +164,12 @@ setup_macos_specific() {
   dockutil --add "/Applications/Ghostty.app" --position 1
   dockutil --add "/Applications/Arc.app" --position 2
   dockutil --add "/Applications/Claude.app" --position 3
-  dockutil --add "/Applications/Calendar.app" --position 4
-  dockutil --add "/Applications/Music.app" --position 5
+  dockutil --add "/System/Applications/Calendar.app" --position 4
+  dockutil --add "/System/Applications/Music.app" --position 5
 
   # Finally, restart the Dock to apply
-  killall Dock
+  osascript -e 'tell application "Dock" to quit'
+
   info "Dock configured!"
 }
 
