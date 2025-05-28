@@ -194,6 +194,36 @@ post_install() {
   if [[ "$SHELL" != */zsh ]]; then
     warn "Current shell is not zsh. Run 'chsh -s $(which zsh)' to change it."
   fi
+
+  # Set up ssh config with 1Password ssh agent
+  SSH_CONFIG="$HOME/.ssh/config"
+  ONEPASSWORD_AGENT_PATH="~/Library/Group\\ Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+  # Create ~/.ssh directory if it doesn't exist
+  mkdir -p "$HOME/.ssh"
+  chmod 700 "$HOME/.ssh"
+
+  # Add 1Password SSH agent config if not already present
+  if ! grep -q "IdentityAgent .*2BUA8C4S2C.com.1password" "$SSH_CONFIG" 2>/dev/null; then
+    {
+      echo ""
+      echo "Host *"
+      echo "  IdentityAgent $ONEPASSWORD_AGENT_PATH"
+    } >>"$SSH_CONFIG"
+    echo "🔐 Added 1Password SSH agent to ~/.ssh/config"
+  else
+    echo "✅ 1Password SSH agent already configured in ~/.ssh/config"
+  fi
+
+  chmod 600 "$SSH_CONFIG"
+
+  # Set Git user config
+  if [ -z "$(git config --global user.name)" ]; then
+    git config --global user.name "marhaasa"
+    git config --global user.email "marius@aasarod.no"
+    echo "Configured Git user."
+  fi
+
 }
 
 # Main installation
