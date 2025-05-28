@@ -184,6 +184,7 @@ post_install() {
   info "Running post-install tasks..."
 
   # Add zsh to /etc/shells
+  info "Adding zsh to /etc/shells..."
   echo $(which zsh) | sudo tee -a /etc/shells
 
   # Set zsh as default shell if not already
