@@ -183,12 +183,8 @@ install_packages() {
 post_install() {
   info "Running post-install tasks..."
 
-  # Install pure prompt for zsh
-  if [[ ! -d "$HOME/.zsh/pure" ]]; then
-    info "Installing pure prompt..."
-    mkdir -p "$HOME/.zsh"
-    git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure" || warn "Failed to install pure prompt"
-  fi
+  # Add zsh to /etc/shells
+  echo $(which zsh) | sudo tee -a /etc/shells
 
   # Set zsh as default shell if not already
   if [[ "$SHELL" != */zsh ]]; then
