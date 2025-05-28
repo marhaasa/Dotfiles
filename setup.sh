@@ -118,7 +118,13 @@ setup_neovim() {
   # Install Neovim if not present
   if ! command -v nvim &>/dev/null; then
     warn "Neovim not found. Please install it."
+  else
+    if command -v nvim >/dev/null 2>&1; then
+      info "Installing LazyVim plugins..."
+      nvim --headless "+Lazy! sync" +qa
+    fi
   fi
+
 }
 
 # Setup Ghostty
