@@ -77,10 +77,13 @@ fi
 autoload -U promptinit; promptinit
 prompt pure
 
+autoload -Uz bracketed-paste-magic
+zle -N bracketed-paste bracketed-paste-magic
+
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 
-alias ghost='/Users/mariushogliaasarod/Repos/github.com/lukeshere/ghostty-animation-command/target/debug/./ghostty_animation'
+alias ghost="npx ghosttime"
 
 sintef() {
   cd /Users/Shared/repos/Sintef/Power\ BI/

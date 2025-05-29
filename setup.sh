@@ -198,7 +198,7 @@ install_packages() {
   # Install Python tools
   if command -v pipx &>/dev/null; then
     info "Installing Python tools..."
-    pipx install poetry || warn "Failed to install poetry"
+    pipx install poetry ms-fabric-cli || warn "Failed to install Python tools"
   else
     warn "pipx not found. Install it with: brew install pipx"
   fi
