@@ -173,6 +173,9 @@ setup_macos_specific() {
   dockutil --add "/System/Applications/Calendar.app" --position 4
   dockutil --add "/System/Applications/Music.app" --position 5
 
+  # Remove recent apps part of Dock
+  defaults write com.apple.dock show-recents -bool false
+
   # Finally, restart the Dock to apply
   osascript -e 'tell application "Dock" to quit'
 
