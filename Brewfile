@@ -41,6 +41,7 @@ brew 'minikube'
 brew 'ollama'
 brew 'pure'
 brew 'dockutil'
+brew 'docker-compose'
 
 cask '1password'
 cask '1password-cli'
