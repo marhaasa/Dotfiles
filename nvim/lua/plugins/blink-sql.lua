@@ -30,12 +30,11 @@ return {
 
     -- SQL-specific completion configuration
     opts.completion = vim.tbl_extend("force", opts.completion or {}, {
-      keyword_length = 1, -- Start completion after 1 character for SQL
-      trigger_characters = { ".", "@", "#", "[", "(", " " },
-
-      -- Better completion menu for SQL
-      menu = vim.tbl_extend("force", opts.completion.menu or {}, {
+      list = vim.tbl_extend("force", opts.completion.list or {}, {
         max_items = 50, -- Show more items for SQL (many keywords/functions)
+      }),
+
+      menu = vim.tbl_extend("force", opts.completion.menu or {}, {
         draw = {
           columns = {
             { "kind_icon", "label", gap = 1 },
@@ -44,7 +43,6 @@ return {
         },
       }),
 
-      -- Enhanced ghost text for SQL
       ghost_text = vim.tbl_extend("force", opts.completion.ghost_text or {}, {
         enabled = true,
       }),
@@ -73,10 +71,6 @@ return {
         vim.b.blink_cmp_config = {
           sources = {
             default = { "buffer", "snippets", "path" }, -- Use buffer/snippets since no LSP
-          },
-          completion = {
-            keyword_length = 2, -- Less aggressive without LSP
-            trigger_characters = { ".", "@", "#", "[", "(", " ", "'" },
           },
         }
       end,
