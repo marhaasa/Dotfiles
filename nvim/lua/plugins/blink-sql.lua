@@ -6,23 +6,10 @@ return {
   opts = function(_, opts)
     -- Enhanced SQL completion sources
     opts.sources = opts.sources or {}
-    opts.sources.default = opts.sources.default or { "lsp", "path", "snippets", "buffer" }
+    opts.sources.default = opts.sources.default or { "buffer", "path", "snippets" }
 
-    -- Add SQL-specific completion behavior
+    -- Add SQL-specific completion behavior (no LSP configuration since sqls is disabled)
     opts.sources.providers = opts.sources.providers or {}
-
-    -- Enhanced LSP provider for SQL
-    opts.sources.providers.lsp = vim.tbl_extend("force", opts.sources.providers.lsp or {}, {
-      name = "LSP",
-      module = "blink.cmp.sources.lsp",
-      score_offset = 1000, -- Prioritize LSP completions for SQL
-      opts = {
-        -- Better SQL keyword completion
-        get_trigger_characters = function()
-          return { ".", "@", "#", "[", "(", " " } -- SQL-specific triggers
-        end,
-      },
-    })
 
     -- Better buffer completion for SQL files
     opts.sources.providers.buffer = vim.tbl_extend("force", opts.sources.providers.buffer or {}, {
@@ -82,13 +69,13 @@ return {
         -- Enable more aggressive completion for SQL files
         vim.opt_local.completeopt = "menu,menuone,noselect,noinsert"
 
-        -- SQL-specific completion settings
+        -- SQL-specific completion settings (no LSP since sqls is disabled)
         vim.b.blink_cmp_config = {
           sources = {
-            default = { "lsp", "buffer", "snippets" }, -- Prioritize LSP for SQL
+            default = { "buffer", "snippets", "path" }, -- Use buffer/snippets since no LSP
           },
           completion = {
-            keyword_length = 1, -- More aggressive completion for SQL
+            keyword_length = 2, -- Less aggressive without LSP
             trigger_characters = { ".", "@", "#", "[", "(", " ", "'" },
           },
         }
