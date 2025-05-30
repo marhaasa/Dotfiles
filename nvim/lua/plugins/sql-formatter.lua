@@ -102,15 +102,34 @@ return {
               timeout_ms = 3000,
             })
             
-            -- Then align columns in CREATE TABLE statements
+            -- Then align columns in CREATE TABLE statements with validation
             local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
             local aligned_lines = {}
             local in_table = false
             local column_lines = {}
+            local table_start_line = nil
+            
+            -- First pass: validate SQL structure
+            local create_table_count = 0
+            local closing_paren_count = 0
+            for i, line in ipairs(lines) do
+              if line:match("CREATE TABLE") then
+                create_table_count = create_table_count + 1
+              elseif line:match("^%s*%)") then
+                closing_paren_count = closing_paren_count + 1
+              end
+            end
+            
+            -- If structure is invalid, show error and don't process
+            if create_table_count > closing_paren_count then
+              vim.notify("SQL syntax error: Missing closing parenthesis for CREATE TABLE statement. Please fix syntax before formatting.", vim.log.levels.ERROR)
+              return
+            end
             
             for i, line in ipairs(lines) do
               if line:match("CREATE TABLE") then
                 in_table = true
+                table_start_line = i
                 table.insert(aligned_lines, line)
               elseif in_table and line:match("^%s*%)") then
                 -- Align collected column lines
@@ -182,11 +201,20 @@ return {
               else
                 if not in_table then
                   table.insert(aligned_lines, line)
+                else
+                  -- If we're in a table but line doesn't match expected patterns, preserve it
+                  table.insert(aligned_lines, line)
                 end
               end
             end
             
-            -- Replace buffer content
+            -- Additional safety check: ensure we didn't lose any lines
+            if #aligned_lines ~= #lines then
+              vim.notify("Alignment failed: Line count mismatch. Preserving original content.", vim.log.levels.WARN)
+              return
+            end
+            
+            -- Replace buffer content only if validation passes
             vim.api.nvim_buf_set_lines(0, 0, -1, false, aligned_lines)
           end, { desc = "Format and Align SQL", buffer = true })
         end,
