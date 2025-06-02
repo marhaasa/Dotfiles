@@ -2,3 +2,21 @@ text-width 72
 browser "open %u"
 max-items 500
 
+# Base background and article content
+color background          color223 color234
+color article             color223 color234
+
+# Feed list
+color listnormal          color223 color234
+color listnormal_unread   color208 color234 bold
+color listfocus           color234 color208 bold
+color listfocus_unread    color234 color208 bold
+
+# Headers and title bars (now green)
+color title               color106 color234 bold
+color info                color106 color234
+color hint-key            color106 color234 bold
+color hint-keys-delimiter color245 color234
+color hint-separator      color245 color234
+color hint-description    color245 color234
+
