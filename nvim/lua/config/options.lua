@@ -26,8 +26,8 @@ opt.showcmd = false
 opt.cursorline = false
 opt.cursorcolumn = false
 
--- These functions along with the underlying notat CLI is heavily borrowed from mischavandenburg
--- This requires the underlying adaptation of the CLI to be accessible locally
+-- These functions along with the underlying [scribe CLI](https://github.com/marhaasa/scribe) is heavily borrowed from mischavandenburg
+-- This requires scribe to be accessible locally
 local function create_and_open_new_note()
   -- Get the current line
   local line = vim.api.nvim_get_current_line()
@@ -37,11 +37,11 @@ local function create_and_open_new_note()
 
   if title then
     -- Construct and execute the zk command
-    local cmd = string.format('notat nytt --vim "%s"', title)
+    local cmd = string.format('scribe new --vim "%s"', title)
     local output = vim.fn.system(cmd)
 
     -- Extract the file path from the output and clean it
-    local file_path = output:match("Nytt notat opprettet: (.+)")
+    local file_path = output:match("New note created: (.+)")
     if file_path then
       -- Remove null bytes, newlines, and trim whitespace
       file_path = file_path:gsub("%z", ""):gsub("\n", ""):gsub("^%s*(.-)%s*$", "%1")
@@ -70,29 +70,36 @@ vim.api.nvim_create_user_command("CreateAndOpenNewNote", create_and_open_new_not
 -- Optional: Add a key mapping
 vim.keymap.set("n", "<leader>zn", ":CreateAndOpenNewNote<CR>", { desc = "Create and open notat" })
 
-local function yank_and_search_markdown_link()
+local function yank_and_open_markdown_link()
   vim.cmd("normal! yi]")
   local yanked_text = vim.fn.getreg('"')
-
-  -- Remove the brackets if they were captured
   yanked_text = yanked_text:gsub("%[%[(.-)%]%]", "%1")
 
-  if yanked_text ~= "" then
-    -- Escape special characters for find_files
-    yanked_text = vim.fn.escape(yanked_text, "\\.")
-
-    require("telescope.builtin").find_files({
-      search_file = yanked_text,
-      hidden = true,
-      no_ignore = true,
-      follow = true,
-    })
-  else
+  if yanked_text == "" then
     print("No text found inside brackets")
+    return
+  end
+
+  -- Escape special characters in the file name
+  local escaped = vim.fn.escape(yanked_text, "\\.^$*+?[]")
+
+  -- Use plenary to scan for matching files
+  local scan = require("plenary.scandir")
+  local files = scan.scan_dir(vim.loop.cwd(), {
+    depth = 5,
+    hidden = true,
+    add_dirs = false,
+    search_pattern = escaped .. ".*%.md$",
+  })
+
+  if #files > 0 then
+    vim.cmd("edit " .. vim.fn.fnameescape(files[1]))
+  else
+    print("No file found matching: " .. yanked_text)
   end
 end
 
-vim.api.nvim_create_user_command("YankAndSearchMarkdownLink", yank_and_search_markdown_link, {})
+vim.api.nvim_create_user_command("YankAndSearchMarkdownLink", yank_and_open_markdown_link, {})
 
 vim.keymap.set(
   "n",
