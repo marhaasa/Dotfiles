@@ -13,9 +13,11 @@ A collection of my public config and dotfiles. Primary setup uses **zsh** with *
 
 ## Installation
 
-1. Clone this repo
-2. Run `./setup.sh`
-3. Start 1Password and enable Developer -> Use the SSH Agent
+1. Install homebrew: `
+bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)`
+2. Clone this repo
+3. Run `./setup.sh`
+4. Start 1Password and enable Developer -> Use the SSH Agent
 
 
 ## Notes

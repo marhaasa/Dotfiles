@@ -1,3 +1,5 @@
 lazy-lock.json
 .DS_Store
 lazyvim.json
+newsboat/cache.db
+newsboat/cache.db.lock
