@@ -6,7 +6,7 @@ A collection of my public config and dotfiles. Primary setup uses **zsh** with *
 - **Shell**: zsh with pure prompt
 - **Terminal**: Ghostty 
 - **Editor**: Neovim
-- Git config: marhaasa / marius@aasarod.no
+- **Git config**: marhaasa / marius@aasarod.no
 - **Git UI**: Lazygit
 - **Package Manager**: Homebrew
 - **SSH Agent**: 1Password
