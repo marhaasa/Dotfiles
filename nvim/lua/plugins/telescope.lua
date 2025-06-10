@@ -1,16 +1,12 @@
 return {
+  -- Override LazyVim's default telescope configuration
   {
     "nvim-telescope/telescope.nvim",
-    dependencies = {
-      {"nvim-lua/plenary.nvim"}
-    },
-    keys = {
-      { "<leader>ff", "<cmd>Telescope find_files<cr>", desc = "Find Files Telescope" },
-      { "<leader>ft", "<cmd>Telescope live_grep<cr>", desc = "Find text in files" }
-    },
-    
-    opts = {
-      defaults = {
+    cmd = "Telescope",
+    version = false, -- telescope did only one release, so use HEAD for now
+    -- Note: keymaps are defined in lua/config/keymaps.lua to override LazyVim defaults
+    opts = function(_, opts)
+      local defaults = {
         prompt_prefix = " ",
         selection_caret = " ",
         path_display = { "truncate" },
@@ -28,16 +24,22 @@ return {
           height = 0.80,
           preview_cutoff = 120,
         },
-      },
-      pickers = {
+      }
+      
+      local pickers = {
         find_files = {
           find_command = { "rg", "--files", "--glob", "!**/.git/*", "-L" },
           hidden = false,
           no_ignore = false,
           follow = true,
         },
-      },
-    },
+      }
+      
+      return vim.tbl_deep_extend("force", opts or {}, {
+        defaults = defaults,
+        pickers = pickers,
+      })
+    end,
   },
   {
     "telescope.nvim",

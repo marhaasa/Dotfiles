@@ -83,140 +83,24 @@ return {
   {
     "stevearc/conform.nvim",
     init = function()
-      -- Manual SQL formatting with <leader>f
+      -- SQL formatting keymaps
       vim.api.nvim_create_autocmd("FileType", {
         pattern = { "sql", "mysql", "plsql" },
         callback = function()
-          vim.keymap.set("n", "<leader>f", function()
+          vim.keymap.set("n", "<leader>fmt", function()
             require("conform").format({
               bufnr = vim.api.nvim_get_current_buf(),
               timeout_ms = 3000,
             })
           end, { desc = "Format SQL", buffer = true })
           
-          -- Add column alignment function
-          vim.keymap.set("n", "<leader>fa", function()
-            -- First format with sql-formatter
+          vim.keymap.set("n", "<leader>fma", function()
             require("conform").format({
               bufnr = vim.api.nvim_get_current_buf(),
               timeout_ms = 3000,
             })
-            
-            -- Then align columns in CREATE TABLE statements with validation
-            local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-            local aligned_lines = {}
-            local in_table = false
-            local column_lines = {}
-            local table_start_line = nil
-            
-            -- First pass: validate SQL structure
-            local create_table_count = 0
-            local closing_paren_count = 0
-            for i, line in ipairs(lines) do
-              if line:match("CREATE TABLE") then
-                create_table_count = create_table_count + 1
-              elseif line:match("^%s*%)") then
-                closing_paren_count = closing_paren_count + 1
-              end
-            end
-            
-            -- If structure is invalid, show error and don't process
-            if create_table_count > closing_paren_count then
-              vim.notify("SQL syntax error: Missing closing parenthesis for CREATE TABLE statement. Please fix syntax before formatting.", vim.log.levels.ERROR)
-              return
-            end
-            
-            for i, line in ipairs(lines) do
-              if line:match("CREATE TABLE") then
-                in_table = true
-                table_start_line = i
-                table.insert(aligned_lines, line)
-              elseif in_table and line:match("^%s*%)") then
-                -- Align collected column lines
-                if #column_lines > 0 then
-                  local max_name_len = 0
-                  local max_type_len = 0
-                  
-                  -- Find max lengths - handle both bracketed and non-bracketed names
-                  for _, col_line in ipairs(column_lines) do
-                    -- Try bracketed first, then non-bracketed
-                    local name, type_and_rest = col_line.content:match("^%s*(%[.-%])%s+(.+)")
-                    local is_bracketed = true
-                    
-                    if not name then
-                      name, type_and_rest = col_line.content:match("^%s*([^%s]+)%s+(.+)")
-                      is_bracketed = false
-                    end
-                    
-                    if name and type_and_rest then
-                      -- Add brackets to length calculation if not already bracketed
-                      if not is_bracketed then
-                        name = "[" .. name .. "]"
-                      end
-                      
-                      local type_part = type_and_rest:match("^([^%s]+)")
-                      if type_part then
-                        max_name_len = math.max(max_name_len, #name)
-                        max_type_len = math.max(max_type_len, #type_part)
-                      end
-                    end
-                  end
-                  
-                  -- Align columns - handle both bracketed and non-bracketed names
-                  for _, col_line in ipairs(column_lines) do
-                    -- Try bracketed first, then non-bracketed
-                    local name, type_and_rest = col_line.content:match("^%s*(%[.-%])%s+(.+)")
-                    local is_bracketed = true
-                    
-                    if not name then
-                      name, type_and_rest = col_line.content:match("^%s*([^%s]+)%s+(.+)")
-                      is_bracketed = false
-                    end
-                    
-                    if name and type_and_rest then
-                      -- Add brackets if not already bracketed
-                      if not is_bracketed then
-                        name = "[" .. name .. "]"
-                      end
-                      
-                      local type_part, rest = type_and_rest:match("^([^%s]+)%s*(.*)")
-                      if type_part then
-                        local aligned = string.format("    %-" .. max_name_len .. "s %-" .. max_type_len .. "s %s",
-                                                     name, type_part, rest or "")
-                        table.insert(aligned_lines, aligned)
-                      else
-                        table.insert(aligned_lines, col_line.content)
-                      end
-                    else
-                      table.insert(aligned_lines, col_line.content)
-                    end
-                  end
-                end
-                
-                table.insert(aligned_lines, line)
-                in_table = false
-                column_lines = {}
-              elseif in_table and (line:match("^%s*%[") or line:match("^%s*[%w_]+%s+[%w%(%)]+")) then
-                table.insert(column_lines, {content = line, index = i})
-              else
-                if not in_table then
-                  table.insert(aligned_lines, line)
-                else
-                  -- If we're in a table but line doesn't match expected patterns, preserve it
-                  table.insert(aligned_lines, line)
-                end
-              end
-            end
-            
-            -- Additional safety check: ensure we didn't lose any lines
-            if #aligned_lines ~= #lines then
-              vim.notify("Alignment failed: Line count mismatch. Preserving original content.", vim.log.levels.WARN)
-              return
-            end
-            
-            -- Replace buffer content only if validation passes
-            vim.api.nvim_buf_set_lines(0, 0, -1, false, aligned_lines)
-          end, { desc = "Format and Align SQL", buffer = true })
+            -- Note: Column alignment logic could be added here in the future
+          end, { desc = "Format and align SQL", buffer = true })
         end,
       })
 
