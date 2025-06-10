@@ -1,36 +1,57 @@
 return {
   "nvim-treesitter/nvim-treesitter",
-  run = ":TSUpdate",
+  build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile" }, -- Lazy load on file open
+  cmd = { "TSUpdateSync", "TSUpdate", "TSInstall" },
   config = function()
     require("nvim-treesitter.configs").setup({
+      -- Only install parsers for languages you actively use
       ensure_installed = {
-        "c",
         "lua",
-        "python",
+        "python", 
         "javascript",
         "typescript",
         "bash",
-        "vimdoc",
-        "html",
         "json",
-        "query",
-        "regex",
-        "vim",
         "yaml",
         "go",
-        "bicep",
-        "terraform",
         "sql",
+        "markdown",
+        "markdown_inline",
       },
+      
+      -- Install parsers synchronously (only applied to `ensure_installed`)
+      sync_install = false,
+      
+      -- Automatically install missing parsers when entering buffer
+      auto_install = true,
+      
       highlight = {
         enable = true,
-        disable = function(lang)
+        -- Performance: disable for large files and problematic languages
+        disable = function(lang, buf)
+          local max_filesize = 100 * 1024 -- 100 KB
+          local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+          if ok and stats and stats.size > max_filesize then
+            return true
+          end
+          
+          -- Disable for specific cases that cause issues
           local buf_name = vim.fn.expand("%")
           if lang == "terraform" and string.find(buf_name, "fixture") then
             return true
           end
         end,
+        
+        -- Performance: limit additional highlighting
+        additional_vim_regex_highlighting = false,
       },
+      
+      -- Performance: disable incremental selection (rarely used)
+      incremental_selection = { enable = false },
+      
+      -- Performance: disable indentation (can be slow)
+      indent = { enable = false },
     })
   end,
 }

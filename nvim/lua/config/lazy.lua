@@ -1,3 +1,6 @@
+-- Load performance optimizations early
+require("config.performance")
+
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
   -- bootstrap lazy.nvim
@@ -29,17 +32,29 @@ require("lazy").setup({
   install = { colorscheme = { "tokyonight", "habamax" } },
   checker = { enabled = true, notify = false }, -- automatically check for plugin updates
   performance = {
+    cache = {
+      enabled = true,
+    },
+    reset_packpath = true, -- reset the package path to improve startup time
     rtp = {
+      reset = true, -- reset the runtime path to improve startup time
       -- disable some rtp plugins
       disabled_plugins = {
         "gzip",
-        -- "matchit",
-        -- "matchparen",
-        -- "netrwPlugin",
+        "matchit",
+        "matchparen", 
+        "netrwPlugin",
         "tarPlugin",
         "tohtml",
-        --"tutor",
+        "tutor",
         "zipPlugin",
+        "rplugin",
+        "syntax",
+        "synmenu",
+        "optwin",
+        "compiler",
+        "bugreport",
+        "ftplugin",
       },
     },
   },
