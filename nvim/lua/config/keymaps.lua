@@ -101,13 +101,25 @@ local function yank_and_open_markdown_link()
     return
   end
 
-  local escaped = vim.fn.escape(yanked_text, "\\.^$*+?[]")
   local scan = require("plenary.scandir")
-  local files = scan.scan_dir(vim.loop.cwd(), {
+  
+  -- Search in notes directory first, fall back to current directory
+  local notes_dir = vim.fn.expand("~/notes")
+  local search_dir = vim.fn.isdirectory(notes_dir) == 1 and notes_dir or vim.loop.cwd()
+  
+  -- Properly escape all special characters for Lua patterns
+  local function escape_pattern(text)
+    -- Escape all Lua pattern special characters
+    return text:gsub("([%.%^%$%(%)%[%]%*%+%-%?])", "%%%1")
+  end
+  
+  local escaped_text = escape_pattern(yanked_text)
+  
+  local files = scan.scan_dir(search_dir, {
     depth = 5,
     hidden = true,
     add_dirs = false,
-    search_pattern = escaped .. ".*%.md$",
+    search_pattern = ".*" .. escaped_text .. ".*%.md$",
   })
 
   if #files > 0 then
