@@ -103,7 +103,7 @@ buildsql() {
 alias ..="cd .."
 alias repos="cd /Users/Shared/repos"
 alias home="cd $HOME"
-alias notes="cd $NOTES"
+alias notes="cd $NOTES && nvim -c 'Telescope find_files'"
 alias icloud="cd \$ICLOUD"
 alias dot="cd \$DOTFILES"
 # ls
