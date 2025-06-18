@@ -24,6 +24,7 @@ export DOTFILES="$GHREPOS/dotfiles"
 export SCRIPTS="$DOTFILES/scripts"
 export ICLOUD="$HOME/icloud"
 export NOTES="$HOME/notes"
+export SCRIBE_LANG=no
 
 
 # ~~~~~~~~~~~~~~~ Path configuration ~~~~~~~~~~~~~~~~~~~~~~~~

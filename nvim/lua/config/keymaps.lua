@@ -36,7 +36,8 @@ vim.keymap.set("n", "<leader>wsq", 'ciw""<Esc>P', { desc = "Surround word with q
 
 -- Text replacement
 vim.keymap.set("n", "<leader>rbs", "<cmd>%s/\\//g<CR>", { desc = "Replace backward slashes" })
-vim.keymap.set("n", "<leader>rlt", "<cmd>lua require('textcase').current_word('to_title_case')<CR>", { desc = "Convert word to title case" })
+vim.keymap.set("n", "<leader>rlt", "<cmd>lua require('textcase').current_word('to_title_case')<CR>",
+  { desc = "Convert word to title case" })
 
 -- ============================================================================
 -- 📅 DATE & TIME INSERTION
@@ -76,7 +77,7 @@ local function create_and_open_new_note()
     local cmd = string.format('scribe new --vim "%s"', title)
     local output = vim.fn.system(cmd)
     local file_path = output:match("New note created: (.+)")
-    
+
     if file_path then
       file_path = file_path:gsub("%z", ""):gsub("\n", ""):gsub("^%s*(.-)%s*$", "%1")
       vim.cmd("badd " .. vim.fn.fnameescape(file_path))
@@ -102,19 +103,19 @@ local function yank_and_open_markdown_link()
   end
 
   local scan = require("plenary.scandir")
-  
+
   -- Search in notes directory first, fall back to current directory
   local notes_dir = vim.fn.expand("~/notes")
   local search_dir = vim.fn.isdirectory(notes_dir) == 1 and notes_dir or vim.loop.cwd()
-  
+
   -- Properly escape all special characters for Lua patterns
   local function escape_pattern(text)
     -- Escape all Lua pattern special characters
     return text:gsub("([%.%^%$%(%)%[%]%*%+%-%?])", "%%%1")
   end
-  
+
   local escaped_text = escape_pattern(yanked_text)
-  
+
   local files = scan.scan_dir(search_dir, {
     depth = 5,
     hidden = true,
@@ -133,15 +134,27 @@ end
 vim.keymap.set("n", "<leader>zn", create_and_open_new_note, { desc = "Create and open new note" })
 vim.keymap.set("n", "<leader>zo", yank_and_open_markdown_link, { desc = "Open note from link" })
 
+-- sage command
+vim.api.nvim_create_user_command('SageTag', function()
+  local file = vim.fn.expand('%:p')
+  vim.fn.system('sage file --quiet "' .. file .. '"')
+  vim.cmd('edit') -- Reload the file
+end, {})
+
+-- sage keymaps
+vim.keymap.set('n', '<leader>zt', function()
+  vim.cmd('SageTag')
+end, { desc = 'Run SageTag on current file' })
+
 -- ============================================================================
 -- 🗃️ DATABASE OPERATIONS
 -- ============================================================================
 
 -- Database connection helpers
 local function execute_sql_with_dadbod(range)
-  local cmd = range == "file" and "silent! %DB" or 
-             range == "visual" and "silent! '<,'>DB" or 
-             range == "line" and "silent! .DB" or ""
+  local cmd = range == "file" and "silent! %DB" or
+      range == "visual" and "silent! '<,'>DB" or
+      range == "line" and "silent! .DB" or ""
   if cmd ~= "" then
     vim.cmd(cmd)
     vim.cmd("redraw!")
@@ -154,7 +167,7 @@ local function execute_fabric_sql(range)
   if database == "" then
     database = "master"
   end
-  
+
   local content, temp_file
   if range == "file" then
     local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
@@ -163,14 +176,14 @@ local function execute_fabric_sql(range)
   elseif range == "line" then
     local line = vim.api.nvim_get_current_line()
     temp_file = vim.fn.tempname() .. ".sql"
-    vim.fn.writefile({line}, temp_file)
+    vim.fn.writefile({ line }, temp_file)
   end
-  
+
   if temp_file then
     local cmd = string.format("sqlcmd -G -S %s -d %s -i %s", fabric_server, database, temp_file)
     local output = vim.fn.system(cmd)
     vim.fn.delete(temp_file)
-    
+
     -- Display output in split window
     vim.cmd('botright split')
     local buf = vim.api.nvim_create_buf(false, true)
@@ -188,15 +201,15 @@ vim.api.nvim_create_autocmd("FileType", {
   pattern = { "sql", "mysql", "plsql" },
   callback = function()
     local opts = { buffer = true }
-    
+
     -- Note: Basic vim-dadbod operations (<leader>de, <leader>dv, <leader>dl) are defined in dadbod.lua
-    
+
     -- Fabric Data Warehouse operations (custom Azure integration)
-    vim.keymap.set("n", "<leader>dae", function() execute_fabric_sql("file") end, 
+    vim.keymap.set("n", "<leader>dae", function() execute_fabric_sql("file") end,
       vim.tbl_extend("force", opts, { desc = "Execute SQL file on Fabric DW" }))
-    vim.keymap.set("n", "<leader>dal", function() execute_fabric_sql("line") end, 
+    vim.keymap.set("n", "<leader>dal", function() execute_fabric_sql("line") end,
       vim.tbl_extend("force", opts, { desc = "Execute current line on Fabric DW" }))
-    
+
     -- Note: SQL formatting keymaps (<leader>fmt, <leader>fma) are defined in sql-formatter.lua
   end,
 })
