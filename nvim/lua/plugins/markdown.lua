@@ -163,10 +163,10 @@ return {
       vim.api.nvim_set_hl(0, "markdownH5", { fg = "#b16286", bold = false })
       vim.api.nvim_set_hl(0, "markdownH6", { fg = "#689d6a", bold = false })
 
-      -- No background for code blocks, neutral icon color
-      vim.api.nvim_set_hl(0, "RenderMarkdownCode", {})
-      vim.api.nvim_set_hl(0, "RenderMarkdownCodeInline", {})
-      vim.api.nvim_set_hl(0, "RenderMarkdownCodeLanguage", {})
+      -- Very subtle backgrounds for code blocks and inline code
+      vim.api.nvim_set_hl(0, "RenderMarkdownCode", { bg = "#2a2a2a" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownCodeInline", { bg = "#2f2f2f" })
+      vim.api.nvim_set_hl(0, "RenderMarkdownCodeLanguage", { bg = "#2a2a2a" })
 
       -- Disable any line-related highlights
       vim.api.nvim_set_hl(0, "RenderMarkdownDash", { fg = "NONE", bg = "NONE" })
