@@ -7,8 +7,8 @@
 -- ============================================================================
 -- 🤖 COMPLETION CONTROLS
 -- ============================================================================
-vim.keymap.set("n", "<leader>p", '<cmd>lua require("cmp").setup { enabled = true }<cr>', { desc = "Enable completion" })
-vim.keymap.set("n", "<leader>P", '<cmd>lua require("cmp").setup { enabled = false }<cr>', { desc = "Disable completion" })
+vim.keymap.set("n", "<leader>ce", '<cmd>lua vim.b.blink_disable = false<cr>', { desc = "Enable blink completion" })
+vim.keymap.set("n", "<leader>cd", '<cmd>lua vim.b.blink_disable = true<cr>', { desc = "Disable blink completion" })
 
 -- ============================================================================
 -- 🔍 SEARCH & NAVIGATION ENHANCEMENTS
@@ -39,12 +39,6 @@ vim.keymap.set("n", "<leader>rbs", "<cmd>%s/\\//g<CR>", { desc = "Replace backwa
 vim.keymap.set("n", "<leader>rlt", "<cmd>lua require('textcase').current_word('to_title_case')<CR>",
   { desc = "Convert word to title case" })
 
--- ============================================================================
--- 📅 DATE & TIME INSERTION
--- ============================================================================
-vim.keymap.set("n", "<leader>d", "<cmd>r!gendate<cr>", { desc = "Insert current date" })
-vim.keymap.set("n", "<leader>h1", "<cmd>r!gendate h 1<cr>", { desc = "Insert date as H1 header" })
-vim.keymap.set("n", "<leader>h2", "<cmd>r!gendate h 2<cr>", { desc = "Insert date as H2 header" })
 
 -- ============================================================================
 -- 🛠️ DEVELOPMENT TOOLS

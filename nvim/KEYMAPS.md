@@ -38,12 +38,6 @@ The leader key is `<Space>` (set by LazyVim default).
 | `<leader>f` | n | Format SQL (SQL files only) | conform.nvim |
 | `<leader>fa` | n | Format and align SQL (SQL files only) | conform.nvim |
 
-### 📅 **Date & Time Insertion**
-| Key | Mode | Description | Plugin/Function |
-|-----|------|-------------|-----------------|
-| `<leader>d` | n | Insert current date | gendate command |
-| `<leader>h1` | n | Insert date as H1 header | gendate command |
-| `<leader>h2` | n | Insert date as H2 header | gendate command |
 
 ### 📝 **Note Taking (Zettelkasten)**
 | Key | Mode | Description | Plugin/Function |
@@ -89,8 +83,8 @@ The leader key is `<Space>` (set by LazyVim default).
 ### 🤖 **AI & Completion**
 | Key | Mode | Description | Plugin/Function |
 |-----|------|-------------|-----------------|
-| `<leader>p` | n | Enable completion | blink.cmp |
-| `<leader>P` | n | Disable completion | blink.cmp |
+| `<leader>ce` | n | Enable blink completion | blink.cmp |
+| `<leader>cd` | n | Disable blink completion | blink.cmp |
 
 #### **GP.nvim (AI Chat) - `<C-g>` prefix**
 | Key | Mode | Description |

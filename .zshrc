@@ -78,6 +78,9 @@ fi
 autoload -U promptinit; promptinit
 prompt pure
 
+# Pure prompt configuration
+zstyle :prompt:pure:git:stash show yes
+
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
@@ -116,6 +119,7 @@ alias la='ls -lathr'
 # alias t='tmux'  # No longer using tmux
 alias python="python3"
 alias v=nvim
+alias claude="/Users/mariushogliaasarod/.claude/local/claude"
 
 # finds all files recursively and sorts by last modification, ignore hidden files
 alias lastmod='find . -type f -not -path "*/\.*" -exec ls -lrt {} +'

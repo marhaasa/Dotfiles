@@ -83,10 +83,18 @@ return {
       ["<C-b>"] = { "scroll_documentation_up" },
     })
 
+    -- Disable completion based on buffer variable
+    opts.enabled = function()
+      return not vim.b.blink_disable
+    end
+
+    -- Keep default global completion settings intact
+    -- Markdown-specific config is handled in the autocmd below
+
     return opts
   end,
 
-  -- SQL-specific autocmds
+  -- SQL and Markdown specific autocmds
   init = function()
     vim.api.nvim_create_autocmd("FileType", {
       pattern = { "sql", "mysql", "plsql" },
@@ -100,6 +108,19 @@ return {
             default = { "buffer", "snippets", "path" }, -- Use buffer/snippets since sqls LSP may be disabled
           },
         }
+      end,
+    })
+
+    -- Markdown-specific less intrusive completion
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = { "markdown", "md" },
+      callback = function()
+        -- Disable blink.cmp for current buffer
+        vim.b.blink_disable = true
+        
+        -- Use native vim completion for markdown
+        vim.opt_local.completeopt = "menu,menuone,noinsert,noselect"
+        vim.opt_local.complete = ".,w,b,t" -- Current buffer, windows, other buffers, tags
       end,
     })
   end,
