@@ -37,6 +37,7 @@ path=(
     /opt/homebrew/bin
     $HOME/bin
     $HOME/.local/bin
+    $HOME/go/bin
     $SCRIPTS
     /opt/homebrew/opt/mssql-tools18/bin
     /Applications/Docker.app/Contents/Resources/bin/
@@ -55,13 +56,13 @@ export PATH
 
 
 HISTFILE=~/.zsh_history
-HISTSIZE=100000
+HISTSIZE=120000
 SAVEHIST=100000
 
 setopt HIST_IGNORE_SPACE  # Don't save when prefixed with space
 setopt HIST_IGNORE_DUPS   # Don't save duplicate lines
 setopt SHARE_HISTORY      # Share history between sessions
-
+setopt EXTENDED_HISTORY
 
 # ~~~~~~~~~~~~~~~ Prompt ~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -84,28 +85,19 @@ zstyle :prompt:pure:git:stash show yes
 autoload -Uz bracketed-paste-magic
 zle -N bracketed-paste bracketed-paste-magic
 
+# ~~~~~~~~~~~~~~~ Functions ~~~~~~~~~~~~~~~~~~~~~~
+
+update-go-tools() {
+  go install github.com/ayn2op/discordo@latest
+}
 
 # ~~~~~~~~~~~~~~~ Aliases ~~~~~~~~~~~~~~~~~~~~~~~~
 
 alias ghost="npx ghosttime"
 
-sintef() {
-  cd /Users/Shared/repos/Sintef/Power\ BI/
-  nvim
-}
-
-buildsql() {
-    local project_file=$(find . -name "DW.sqlproj" -print -quit)
-    if [[ -n "$project_file" ]]; then
-        dotnet build "$project_file" /p:NetCoreBuild=true /p:NETCoreTargetsPath="/Users/mariushogliaasarod/.azuredatastudio/extensions/microsoft.sql-database-projects-1.4.5/BuildDirectory" /p:SystemDacpacsLocation="/Users/mariushogliaasarod/.azuredatastudio/extensions/microsoft.sql-database-projects-1.4.5/BuildDirectory"
-    else
-        echo "No .sqlproj file found in the current directory or its subdirectories."
-    fi
-}
-
 # cd
 alias ..="cd .."
-alias repos="cd /Users/Shared/repos"
+alias repos="cd $REPOS"
 alias home="cd $HOME"
 alias notes="cd $NOTES && nvim -c 'Telescope find_files'"
 alias icloud="cd \$ICLOUD"
@@ -137,6 +129,7 @@ alias hy="
   fc -ln 0 |
   awk '!a[\$0]++' |
   fzf --tac --multi --header 'Copy history' |
+  tr -d '\n' |
   pbcopy
 "
 
